@@ -8,6 +8,22 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     position: "relative",
   },
+  avatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 16,
+    backgroundColor: "#F6F6F6",
+    position: "absolute",
+    top: -60,
+    left: "40%",
+  },
+
+  addButton: {
+    backgroundColor: "transparent",
+    borderRadius: "50%",
+    padding: 6,
+    position: "relative",
+  },
   title: {
     fontFamily: "Roboto-Medium",
     textAlign: "center",
@@ -16,7 +32,7 @@ export const styles = StyleSheet.create({
     lineHeight: 35,
     color: "#212121",
     marginBottom: 33,
-    marginTop: 32,
+    marginTop: 92,
     letterSpacing: 0.01,
   },
   inputWrapp: {
@@ -29,6 +45,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
 
+    borderColor: "#BDBDBD",
     borderWidth: 1,
     placeholderTextColor: "#BDBDBD",
     fontSize: 16,
