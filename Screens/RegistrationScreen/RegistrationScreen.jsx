@@ -45,9 +45,7 @@ export function RegistationScreen() {
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-      >
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : ""}>
         <View style={styles.container}>
           <View style={styles.avatar} />
           <Text style={{ ...styles.title }}>Registration</Text>
