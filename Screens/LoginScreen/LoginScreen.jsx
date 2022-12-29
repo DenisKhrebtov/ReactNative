@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
 
 import { styles } from "./LoginScreen.styled";
@@ -54,7 +55,7 @@ export function LoginScreen() {
                 placeholder="Email address"
                 style={{
                   ...styles.input,
-                  borderColor: isFocused ? "#FF6C00" : "#BDBDBD",
+                  borderColor: isFocused ? "#FF6C00" : "#BDBDBç",
                 }}
                 value={info.email}
                 onFocus={handleFocus}
