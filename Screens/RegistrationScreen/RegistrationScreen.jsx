@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import {
+  ImageBackground,
   Platform,
   KeyboardAvoidingView,
   View,
@@ -19,7 +20,7 @@ const initialState = {
   password: "",
 };
 
-export function RegistationScreen() {
+export function RegistationScreen({ navigation }) {
   const [info, setInfo] = useState(initialState);
   const [showPassword, setShowPassword] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
