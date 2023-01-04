@@ -8,12 +8,12 @@ export const PostsScreen = () => {
       <View style={styles.profile}>
         <View>
           <Image
-            source={require("../../../assets/images/avatar.png")}
+            source={require("../../../assets/img/avatar.png")}
             style={styles.avatar}
           />
         </View>
         <View style={styles.info}>
-          <Text style={styles.name}>Natali Romanova</Text>
+          <Text style={styles.name}>Denis Dmitrovich</Text>
           <Text style={styles.email}>email@example.com</Text>
         </View>
       </View>

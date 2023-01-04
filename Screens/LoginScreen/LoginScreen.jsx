@@ -48,7 +48,7 @@ export function LoginScreen({ navigation }) {
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
         <ImageBackground
-          source={require("../../assets/images/bgImage.jpg")}
+          source={require("../../assets/img/PhotoBG.jpg")}
           style={styles.bgImage}
         >
           <KeyboardAvoidingView
