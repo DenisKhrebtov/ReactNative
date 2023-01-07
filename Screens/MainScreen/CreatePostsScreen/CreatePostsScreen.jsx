@@ -1,3 +1,10 @@
+import { useEffect, useState } from "react";
+
+import { Camera, CameraType } from "expo-camera";
+import * as Location from "expo-location";
+
+import { MaterialIcons, Feather } from "@expo/vector-icons";
+
 import {
   KeyboardAvoidingView,
   Text,
@@ -9,14 +16,19 @@ import {
   Keyboard,
 } from "react-native";
 import { styles } from "./CreatePostsScreen.styled";
-import { Camera, CameraType } from "expo-camera";
-import { MaterialIcons, Feather } from "@expo/vector-icons";
-import { useState } from "react";
 
-export const CreatePostsScreen = () => {
+const initialState = {
+  name: "",
+  place: "",
+};
+
+export const CreatePostsScreen = ({ navigation }) => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [info, setInfo] = useState(initialState);
+  const [location, setLocation] = useState(null);
+  const [status, setStatus] = useState(false);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -28,10 +40,47 @@ export const CreatePostsScreen = () => {
     setIsShowKeyboard(true);
   };
 
-  const takePhone = async ({ navigation }) => {
-    const photo = await camera.takePictureAsync();
-    setPhoto(photo.uri);
+  const handleChangeName = (value) => {
+    setInfo((prevState) => ({ ...prevState, name: value }));
+    statusCheck();
+    return;
   };
+
+  const handleChangePlace = (value) => {
+    setInfo((prevState) => ({ ...prevState, place: value }));
+    statusCheck();
+    return;
+  };
+
+  const statusCheck = () => {
+    if (photo && info.name && info.place) return setStatus(true);
+  };
+
+  const takePhone = async () => {
+    const photo = await camera.takePictureAsync();
+    const location = await Location.getCurrentPositionAsync();
+    setPhoto(photo.uri);
+    setLocation(location.coords);
+    statusCheck();
+  };
+
+  const sendPhoto = () => {
+    if (!status) return;
+    navigation.navigate("Default", { photo, info, location });
+    setInfo(initialState);
+    setPhoto(null);
+    setStatus(false);
+  };
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Permission to access location was denied");
+        return;
+      }
+    })();
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -67,8 +116,10 @@ export const CreatePostsScreen = () => {
           <View>
             <View style={styles.inputWrapp}>
               <TextInput
+                value={info.name}
                 placeholder="Name..."
                 onFocus={handleFocus}
+                onChangeText={handleChangeName}
                 style={{
                   ...styles.input,
                 }}
@@ -82,8 +133,10 @@ export const CreatePostsScreen = () => {
               }}
             >
               <TextInput
-                placeholder="Location..."
+                value={info.place}
+                placeholder="Place..."
                 onFocus={handleFocus}
+                onChangeText={handleChangePlace}
                 style={{
                   ...styles.input,
                   paddingLeft: 28,
@@ -91,6 +144,7 @@ export const CreatePostsScreen = () => {
               />
               <TouchableOpacity
                 activeOpacity={0.7}
+                onPress={sendPhoto}
                 style={{ ...styles.iconWrapp, marginRight: 8 }}
               >
                 <Feather name="map-pin" size={24} color="#BDBDBD" />
@@ -100,17 +154,20 @@ export const CreatePostsScreen = () => {
               activeOpacity={0.7}
               style={{
                 ...styles.buttonSubmit,
-                backgroundColor: photo ? "#FF6C00" : "#F6F6F6",
+                backgroundColor: status ? "#FF6C00" : "#F6F6F6",
               }}
             >
               <Text
                 style={{
                   ...styles.buttonText,
-                  color: photo ? "#FFFFFF" : "#BDBDBD",
+                  color: status ? "#FFFFFF" : "#BDBDBD",
                 }}
               >
                 Publish
               </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonDelete}>
+              <Feather name="trash-2" size={24} color="#DADADA" />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

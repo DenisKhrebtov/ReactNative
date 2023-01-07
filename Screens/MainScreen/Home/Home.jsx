@@ -10,18 +10,19 @@ import { Feather, Entypo } from "@expo/vector-icons";
 
 const MainTab = createBottomTabNavigator();
 
-export const Home = () => {
+export const Home = ({ navigation }) => {
   return (
     <MainTab.Navigator
       initialRouteName="Posts"
       screenOptions={{
         tabBarActiveTintColor: "#ffffff",
         tabBarActiveBackgroundColor: "#FF6C00",
+        tabBarInactiveTintColor: "#212121CC",
         tabBarShowLabel: false,
         tabBarStyle: {
           paddingTop: 9,
           paddingHorizontal: 63,
-          paddingBottom: 34,
+          paddingBottom: 50,
         },
       }}
     >
@@ -44,7 +45,7 @@ export const Home = () => {
               style={{ marginRight: 10, marginBottom: 10 }}
               activeOpacity={0.7}
             >
-              <Feather name="log-out" size={24} color="grey" />
+              <Feather name="log-out" size={24} color="#BDBDBD" />
             </TouchableOpacity>
           ),
           tabBarItemStyle: {
@@ -60,6 +61,7 @@ export const Home = () => {
         name="Create post"
         component={CreatePostsScreen}
         options={{
+          tabBarStyle: { display: "none" },
           tabBarIcon: ({ fosuced, size, color }) => (
             <TouchableOpacity>
               <Entypo name="plus" size={size} color={color} fosuced={fosuced} />
@@ -69,8 +71,9 @@ export const Home = () => {
             <TouchableOpacity
               style={{ marginLeft: 16, marginBottom: 10 }}
               activeOpacity={0.7}
+              onPress={() => navigation.navigate("Posts")}
             >
-              <Feather name="arrow-left" size={24} color="grey" />
+              <Feather name="arrow-left" size={24} color="#BDBDBD" />
             </TouchableOpacity>
           ),
           tabBarItemStyle: {
