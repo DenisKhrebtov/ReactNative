@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
     paddingHorizontal: 16,
-    paddingTop: 32,
+    paddingVertical: 32,
     justifyContent: "space-between",
   },
   wrapper: {
@@ -50,7 +50,6 @@ export const styles = StyleSheet.create({
   buttonSubmit: {
     borderRadius: 100,
     paddingVertical: 16,
-    marginBottom: 32,
   },
 
   buttonText: {

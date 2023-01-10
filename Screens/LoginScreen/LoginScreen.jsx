@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { authSignInUser } from "../../assets/redux/auth/authOperations";
 
 import {
   ImageBackground,
@@ -25,6 +27,8 @@ export function LoginScreen({ navigation }) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  const dispatch = useDispatch();
+
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     setIsFocused(false);
@@ -32,9 +36,10 @@ export function LoginScreen({ navigation }) {
   };
 
   const onSubmit = () => {
-    setInfo(initialState);
+    if (!info.email || !info.password) return;
     console.log(info);
-    navigation.navigate("Home");
+    dispatch(authSignInUser(info));
+    setInfo(initialState);
   };
 
   const handleFocus = () => {

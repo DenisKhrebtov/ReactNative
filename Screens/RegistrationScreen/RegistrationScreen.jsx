@@ -1,5 +1,13 @@
 import { useState } from "react";
 
+import { useDispatch } from "react-redux";
+
+import * as ImagePicker from "expo-image-picker";
+
+import { authSignUpUser } from "../../assets/redux/auth/authOperations";
+
+import { AntDesign } from "@expo/vector-icons";
+
 import {
   ImageBackground,
   Platform,
@@ -10,6 +18,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from "react-native";
 
 import { styles } from "./RegistrationScreen.styled";
@@ -18,6 +27,7 @@ const initialState = {
   login: "",
   email: "",
   password: "",
+  avatar: "",
 };
 
 export function RegistationScreen({ navigation }) {
@@ -25,6 +35,8 @@ export function RegistationScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+
+  const dispatch = useDispatch();
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -34,13 +46,42 @@ export function RegistationScreen({ navigation }) {
 
   const onSubmit = () => {
     console.log(info);
+    if (!info.login || !info.email || !info.password) return;
+
+    dispatch(authSignUpUser(info));
     setInfo(initialState);
-    navigation.navigate("Home");
   };
 
   const handleFocus = () => {
     setIsShowKeyboard(true);
     setIsFocused(true);
+  };
+
+  const addAvatar = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      const photo = result.assets[0].uri;
+
+      setInfo((prevState) => ({
+        ...prevState,
+        avatar: photo,
+      }));
+    }
+  };
+
+  const deleteAvatar = () => {
+    setInfo((prevState) => ({
+      ...prevState,
+      avatar: "",
+    }));
   };
 
   const onShowPassword = () => setShowPassword(!showPassword);
@@ -61,9 +102,48 @@ export function RegistationScreen({ navigation }) {
                 paddingBottom: isShowKeyboard ? 32 : 78,
               }}
             >
-              <View style={styles.avatar} />
+              <View
+                style={{
+                  position: "absolute",
+                  top: -60,
+                  left: "39%",
+                }}
+              >
+                {info.avatar ? (
+                  <>
+                    <Image
+                      source={{ uri: info.avatar }}
+                      style={styles.avatar}
+                    />
+                    <TouchableOpacity
+                      style={styles.deleteButton}
+                      onPress={deleteAvatar}
+                    >
+                      <AntDesign name="close" size={13} color="#E8E8E8" />
+                    </TouchableOpacity>
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      source={require("../../assets/images/layout.png")}
+                      style={styles.avatar}
+                    />
+                    <TouchableOpacity
+                      style={styles.addButton}
+                      onPress={addAvatar}
+                    >
+                      <AntDesign
+                        name="close"
+                        size={13}
+                        color="#FF6C00"
+                        style={{ transform: [{ rotate: "45deg" }] }}
+                      />
+                    </TouchableOpacity>
+                  </>
+                )}
+              </View>
               <Text style={{ ...styles.title }}>Registration</Text>
-              <View style={{}}>
+              <View style={{ marginBottom: isShowKeyboard ? 0 : 43 }}>
                 <View style={styles.inputWrapp}>
                   <TextInput
                     placeholder="Login"
@@ -73,7 +153,6 @@ export function RegistationScreen({ navigation }) {
                     }}
                     value={info.login}
                     onFocus={handleFocus}
-                    // onBlur={setIsFocused(false)}
                     onChangeText={(value) =>
                       setInfo((prevState) => ({ ...prevState, login: value }))
                     }
