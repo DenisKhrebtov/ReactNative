@@ -11,21 +11,20 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  SafeAreaView,
 } from "react-native";
 
 import { Feather, AntDesign } from "@expo/vector-icons";
 
 import { styles } from "./ProfileScreen.styled";
 
-import db from "../../../firebase/config";
+import db from "../../../assets/firebase/config";
 
 import {
   authSignOutUser,
   authStateChangedUser,
-} from "../../../redux/auth/authOperations";
+} from "../../../assets/redux/auth/authOperations";
 
-import { authSlice } from "../../../redux/auth/authReducer";
+import { authSlice } from "../../../assets/redux/auth/authReducer";
 
 const { updateUserProfile } = authSlice.actions;
 
@@ -52,6 +51,7 @@ export const ProfileScreen = ({ navigation }) => {
     getUserPosts();
     dispatch(authStateChangedUser());
   }, []);
+
   const addAvatar = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -99,10 +99,11 @@ export const ProfileScreen = ({ navigation }) => {
       avatar: "",
     }));
   };
+
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/images/bgImage.jpg")}
+        source={require("../../../assets/img/PhotoBG.jpg")}
         style={styles.bgImage}
       >
         <View
@@ -115,7 +116,7 @@ export const ProfileScreen = ({ navigation }) => {
               <Feather name="log-out" size={24} color="#BDBDBD" />
             </TouchableOpacity>
           </View>
-          <View
+          {/* <View
             style={{
               position: "absolute",
               top: -60,
@@ -138,7 +139,7 @@ export const ProfileScreen = ({ navigation }) => {
                 style={{ transform: [{ rotate: "45deg" }] }}
               />
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View style={{ marginBottom: 33 }}>
             <Text style={styles.userName}>{login}</Text>
           </View>

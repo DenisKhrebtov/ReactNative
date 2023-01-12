@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 32,
     justifyContent: "space-between",
   },
+
   wrapper: {
     height: 230,
   },
@@ -37,6 +38,7 @@ export const styles = StyleSheet.create({
   inputWrapp: {
     marginBottom: 32,
   },
+
   input: {
     paddingBottom: 15,
     color: "#212121",
@@ -50,6 +52,7 @@ export const styles = StyleSheet.create({
   buttonSubmit: {
     borderRadius: 100,
     paddingVertical: 16,
+    // marginBottom: 32,
   },
 
   buttonText: {
@@ -64,6 +67,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     bottom: 16,
   },
+
   buttonDelete: {
     width: 70,
     height: 40,

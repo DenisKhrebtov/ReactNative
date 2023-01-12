@@ -17,7 +17,7 @@ import {
   Keyboard,
 } from "react-native";
 
-import db from "../../../firebase/config";
+import db from "../../../assets/firebase/config";
 
 import { styles } from "./CreatePostsScreen.styled";
 

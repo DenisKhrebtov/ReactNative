@@ -6,9 +6,9 @@ import { Feather } from "@expo/vector-icons";
 
 import { TouchableOpacity } from "react-native";
 
-import { DefaultScreen } from "../NestedScreens/DefaultScreen/DefaultScreen";
-import { MapScreen } from "../NestedScreens/MapScreen/MapScreen";
-import { CommentsScreen } from "../NestedScreens/CommentsScreen/CommentsScreen";
+import { DefaultScreen } from "../../../screens/MainScreen/NestedScreens/DefaultScreen/DefaultScreen";
+import { MapScreen } from "../../../screens/MainScreen/NestedScreens/MapScreen/MapScreen";
+import { CommentsScreen } from "../../../screens/MainScreen/NestedScreens/CommentsScreen/CommentsScreen";
 import { authSignOutUser } from "../../../assets/redux/auth/authOperations";
 
 const NestedScreen = createNativeStackNavigator();
@@ -17,6 +17,7 @@ export const PostsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const signOut = () => dispatch(authSignOutUser());
+
   return (
     <NestedScreen.Navigator>
       <NestedScreen.Screen
@@ -40,6 +41,7 @@ export const PostsScreen = ({ navigation }) => {
         component={CommentsScreen}
         options={{
           headerBackTitleVisible: false,
+
           headerLeft: () => (
             <TouchableOpacity
               activeOpacity={0.7}
@@ -55,6 +57,7 @@ export const PostsScreen = ({ navigation }) => {
         component={MapScreen}
         options={{
           headerBackTitleVisible: false,
+
           headerLeft: () => (
             <TouchableOpacity
               activeOpacity={0.7}

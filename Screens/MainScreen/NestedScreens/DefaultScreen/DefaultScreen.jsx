@@ -5,13 +5,12 @@ import { useSelector } from "react-redux";
 import { Text, View, Image, FlatList, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-import db from "../../../firebase/config";
+import db from "../../../../assets/firebase/config";
 
 import { styles } from "./DefaultScreen.styled";
 
 export const DefaultScreen = ({ navigation }) => {
   const [posts, setPosts] = useState([]);
-
   const { login, email, avatar } = useSelector((state) => state.auth);
 
   const getAllPost = async () => {
@@ -29,7 +28,6 @@ export const DefaultScreen = ({ navigation }) => {
   };
 
   const onLike = async (item) => {
-    console.log(avatar);
     let likes = item.likes ? item.likes + 1 : 0 + 1;
 
     await db
@@ -46,7 +44,7 @@ export const DefaultScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
-        <View>
+        {/* <View>
           {avatar ? (
             <Image source={{ uri: avatar }} style={styles.avatar} />
           ) : (
@@ -55,7 +53,7 @@ export const DefaultScreen = ({ navigation }) => {
               style={styles.avatar}
             />
           )}
-        </View>
+        </View> */}
         <View style={styles.info}>
           <Text style={styles.name}>{login}</Text>
           <Text style={styles.email}>{email}</Text>

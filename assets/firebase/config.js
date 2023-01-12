@@ -10,7 +10,6 @@ const firebaseConfig = {
   storageBucket: "hw-for-reactnative.appspot.com",
   messagingSenderId: "670235340768",
   appId: "1:670235340768:web:c914168c4b4bacd2a20585",
-  measurementId: "G-X0SL37RP04",
 };
 
 // Initialize Firebase

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import {
   View,
+  Keyboard,
   Image,
   Text,
   TextInput,
@@ -11,7 +12,7 @@ import {
   FlatList,
 } from "react-native";
 
-import db from "../../../firebase/config";
+import db from "../../../../assets/firebase/config";
 
 import { Feather } from "@expo/vector-icons";
 
@@ -58,6 +59,11 @@ export const CommentsScreen = ({ route }) => {
       );
   };
 
+  const handleFocus = () => {
+    setIsShowKeyboard(true);
+    setIsFocused(true);
+  };
+
   useEffect(() => {
     getAllPosts();
   }, []);
@@ -65,7 +71,7 @@ export const CommentsScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: currentPhoto }} style={styles.photo} />
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.listWrapp}>
         <FlatList
           data={allComments}
           renderItem={({ item }) => (
@@ -92,6 +98,9 @@ export const CommentsScreen = ({ route }) => {
                 )}
               </View>
               <View style={styles.comment}>
+                <View style={{ marginBottom: 8 }}>
+                  <Text style={styles.userName}>{item.login}</Text>
+                </View>
                 <Text style={styles.commentText}>{item.comment}</Text>
                 <View style={{ marginRight: 0 }}>
                   <Text style={styles.commentDate}>{item.date}</Text>
@@ -103,7 +112,7 @@ export const CommentsScreen = ({ route }) => {
         />
       </SafeAreaView>
       <View>
-        <View style={{ borderRadius: "50%", position: "relative" }}>
+        <View style={{ borderRadius: 50, position: "relative" }}>
           <TextInput
             value={comment}
             placeholder="Comment"

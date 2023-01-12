@@ -6,7 +6,9 @@ export const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingHorizontal: 16,
     paddingTop: 32,
+    paddingBottom: 32,
   },
+
   photo: {
     height: 240,
     borderRadius: 8,
@@ -14,10 +16,14 @@ export const styles = StyleSheet.create({
     marginBottom: 32,
   },
 
+  listWrapp: {
+    flex: 1,
+  },
+
   avatar: {
     width: 28,
     height: 28,
-    borderRadius: "50%",
+    borderRadius: 50,
   },
 
   comment: {
@@ -28,6 +34,14 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: 6,
     padding: 16,
     marginBottom: 24,
+  },
+
+  userName: {
+    color: "#212121",
+    fontFamily: "Roboto-Medium",
+    fontSize: 13,
+    lineHeight: 18,
+    textAlign: "left",
   },
 
   commentText: {
@@ -47,7 +61,7 @@ export const styles = StyleSheet.create({
   },
 
   commentInput: {
-    borderRadius: "50%",
+    borderRadius: 50,
     padding: 16,
     borderColor: "#E8E8E8",
     borderWidth: 1,
@@ -56,7 +70,7 @@ export const styles = StyleSheet.create({
 
   btnSend: {
     backgroundColor: "#FF6C00",
-    borderRadius: "50%",
+    borderRadius: 50,
     position: "absolute",
     right: 8,
     top: 8,

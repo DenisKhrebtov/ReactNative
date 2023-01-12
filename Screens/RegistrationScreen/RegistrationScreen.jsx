@@ -45,10 +45,10 @@ export function RegistationScreen({ navigation }) {
   };
 
   const onSubmit = () => {
-    console.log(info);
     if (!info.login || !info.email || !info.password) return;
 
     dispatch(authSignUpUser(info));
+
     setInfo(initialState);
   };
 
@@ -93,20 +93,25 @@ export function RegistationScreen({ navigation }) {
           source={require("../../assets/img/PhotoBG.jpg")}
           style={styles.bgImage}
         >
-          <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          <View
+            style={{
+              ...styles.wrapper,
+              ...Platform.select({
+                ios: { paddingBottom: isShowKeyboard ? 375 : 78 },
+                android: {
+                  paddingBottom: isShowKeyboard ? 32 : 78,
+                },
+              }),
+            }}
           >
-            <View
-              style={{
-                ...styles.wrapper,
-                paddingBottom: isShowKeyboard ? 32 : 78,
-              }}
+            <KeyboardAvoidingView
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
             >
               <View
                 style={{
                   position: "absolute",
-                  top: -60,
-                  left: "39%",
+                  top: -150,
+                  left: "35%",
                 }}
               >
                 {info.avatar ? (
@@ -124,10 +129,10 @@ export function RegistationScreen({ navigation }) {
                   </>
                 ) : (
                   <>
-                    <Image
+                    {/* <Image
                       source={require("../../assets/images/layout.png")}
                       style={styles.avatar}
-                    />
+                    /> */}
                     <TouchableOpacity
                       style={styles.addButton}
                       onPress={addAvatar}
@@ -142,7 +147,9 @@ export function RegistationScreen({ navigation }) {
                   </>
                 )}
               </View>
+
               <Text style={{ ...styles.title }}>Registration</Text>
+
               <View style={{ marginBottom: isShowKeyboard ? 0 : 43 }}>
                 <View style={styles.inputWrapp}>
                   <TextInput
@@ -201,6 +208,7 @@ export function RegistationScreen({ navigation }) {
                   </TouchableOpacity>
                 </View>
               </View>
+
               {!isShowKeyboard && (
                 <>
                   <TouchableOpacity
@@ -210,22 +218,20 @@ export function RegistationScreen({ navigation }) {
                   >
                     <Text style={styles.buttonText}>Sing Up</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity activeOpacity={0.7}>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => {
+                      navigation.navigate("Login");
+                    }}
+                  >
                     <Text style={styles.linkText}>
-                      Do you already have an account?{" "}
-                      <Text
-                        onPress={() => {
-                          navigation.navigate("Login");
-                        }}
-                      >
-                        Sing In
-                      </Text>
+                      Do you already have an account? <Text>Sing In</Text>
                     </Text>
                   </TouchableOpacity>
                 </>
               )}
-            </View>
-          </KeyboardAvoidingView>
+            </KeyboardAvoidingView>
+          </View>
         </ImageBackground>
       </View>
     </TouchableWithoutFeedback>

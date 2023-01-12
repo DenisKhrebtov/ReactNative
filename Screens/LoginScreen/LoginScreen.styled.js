@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
   },
-  bgImage: {
+  photoBG: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
   buttonShow: {
     position: "absolute",
     right: 16,
-    top: 16,
+    top: 20,
   },
   buttonShowText: {
     fontFamily: "Roboto-Regular",

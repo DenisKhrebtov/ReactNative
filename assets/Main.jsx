@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { RegistationScreen } from "../screens/RegistrationScreen/RegistrationScreen";
 import { LoginScreen } from "../screens/LoginScreen/LoginScreen";
-import { Home } from "../screens/mainScreen/Home/Home";
+import { Home } from "../screens/MainScreen/Home/Home";
 
 import db from "./firebase/config";
 import { authStateChangedUser } from "../assets/redux/auth/authOperations";
