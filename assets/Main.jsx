@@ -32,7 +32,7 @@ export const Main = () => {
 
   useEffect(() => {
     dispatch(authStateChangedUser());
-  }, [stateChange]);
+  }, []);
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {

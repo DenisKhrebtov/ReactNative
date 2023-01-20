@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ReactNative",
-    "slug": "ReactNative",
+    "slug": "denisreactnative",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -16,16 +16,24 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.denis.denisreactnative"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.denis.denisreactnative"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c7ecc1e1-6ca1-4ccb-b672-26271e54e6ce"
+      }
+    },
+    "owner": "deniskhrebtov"
   }
 }
