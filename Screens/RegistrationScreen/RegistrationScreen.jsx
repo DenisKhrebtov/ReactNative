@@ -129,10 +129,10 @@ export function RegistationScreen({ navigation }) {
                   </>
                 ) : (
                   <>
-                    {/* <Image
-                      source={require("../../assets/images/layout.png")}
+                    <Image
+                      source={require("../../assets/img/layout.png")}
                       style={styles.avatar}
-                    /> */}
+                    />
                     <TouchableOpacity
                       style={styles.addButton}
                       onPress={addAvatar}
